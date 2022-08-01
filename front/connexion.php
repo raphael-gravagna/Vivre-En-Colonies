@@ -18,19 +18,18 @@ if(isset($_POST['nom']) && isset($_POST['mdp'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styleOrdi.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Connexion</title>
 </head>
 
-    <?php /*require 'header.php';*/ ?>
+    <?php require 'header.php'; ?>
 
 <body class='body'>
 <main class="main">
     <form class="formContainer" action="" method="post">
         <h1>CONNEXION</h1>
-        <?php if(isset($_SESSION['message'])){echo $_SESSION['message'];} ?>
         <p><input type="text" name="nom" class="zonetext" id="nom" placeholder="nom..."></p>
-        <p><input type="mdp" name="mdp" id="mdp" class="zonetext"  placeholder="mot de passe ..."></p>
+        <p><input type="password" name="mdp" id="mdp" class="zonetext"  placeholder="mot de passe ..."></p>
         <p style="color:red" id="erreur"></p>
         <p><input type="submit" id="#button" class="boutonvalidation" name="submit" value="Envoyer"></p> 
     </form>

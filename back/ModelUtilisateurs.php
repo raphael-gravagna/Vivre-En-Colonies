@@ -68,7 +68,6 @@ class Utilisateur extends Model{
                     $resultat3 = $calcul3-> fetch(PDO::FETCH_ASSOC);
                     
                     $_SESSION['utilisateur'] = $resultat3['id_utilisateur'];
-                    $_SESSION['message'] = '<div class="messageERR">'.'Connexion reussie'.'</div>';
                     if($resultat3['id_droit'] == 42){
                         $_SESSION['utilisateur'] = $resultat3['id_droit'];
                         header('Location: admin.php');
@@ -82,5 +81,23 @@ class Utilisateur extends Model{
                 }else{$_SESSION['message'] = '<div class="messageERR">'.'Password incorrect'.'</div>';}
             }else{$_SESSION['message'] = '<div class="messageERR">'.'Login inexistant'.'</div>';}
     }
+
+    public function rLS()
+    {
+    $recupSection = $this->bdd->prepare("SELECT `nom`, `id`  FROM `sections`");
+    $recupSection->execute();
+    $recupLesSections = $recupSection->fetchall(PDO::FETCH_ASSOC);
+    return $recupLesSections;
+    }
+
+    public function mOr($id_section)
+    {
+        $recupOrdre = $this->bdd->prepare("SELECT min(ordre) FROM articles WHERE id_section = $id_section AND articles.en_ligne = 1;");
+        $recupOrdre->execute();
+        $recupOrdreMin = $recupOrdre->fetchall(PDO::FETCH_ASSOC);
+        //var_dump($recupOrdreMin);
+        return $recupOrdreMin;
+    }
+
 }
 ?>
